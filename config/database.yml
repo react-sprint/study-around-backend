@@ -55,4 +55,4 @@ production:
   socket: /var/run/mysqld/mysqld.sock
   database: study_around_BE_production
   username: study-around-user
-  password: <%= Rails.application.credentials.dig(:db_pwd) %>
+  password: <%= ENV["RAILS_DB_PWD"] %>
