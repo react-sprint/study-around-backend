@@ -124,6 +124,9 @@ GEM
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
     orm_adapter (0.5.0)
+    passenger (6.0.4)
+      rack
+      rake (>= 0.8.1)
     public_suffix (4.0.6)
     puma (4.3.6)
       nio4r (~> 2.0)
@@ -239,6 +242,7 @@ DEPENDENCIES
   jwt
   listen (~> 3.2)
   mysql2 (>= 0.4.4)
+  passenger
   puma (~> 4.1)
   rack-cors
   rails (~> 6.0.3)
