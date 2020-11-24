@@ -18,7 +18,7 @@ class AuthenticationController < ApplicationController
     ## 토큰 만료기간은 '1시간' 으로 설정
     @token = JWT.encode(
       { user_id: user.id, exp: 1.hour.from_now.to_i }, 
-      Rails.application.credentials.dig(:SECRET_KEY_BASE)
+      Rails.application.credentials.dig(:secret_key_base)
     )	
     @tree = { "JWT token": @token, userInfo: {id: user.id, email: user.email} } 
     
