@@ -43,6 +43,7 @@ require 'capistrano/passenger'
 
 set :rbenv_type, :user
 set :rbenv_ruby, '2.6.5'
+# set :RAILS_MASTER_KEY, "/home/study-around-user/study-around-backend/shared/config/credentials/master.key"
 
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
 # Dir.glob("lib/capistrano/tasks/*.rake").each { |r| import r }
