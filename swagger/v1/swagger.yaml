@@ -4,6 +4,32 @@ info:
   title: API V1
   version: v1
 paths:
+  "/users":
+    post:
+      summary: create a user
+      tags:
+      - User
+      parameters: []
+      responses:
+        '201':
+          description: user is created
+          content: {}
+        '422':
+          description: invalid request
+          content: {}
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+              - email
+              - password
   "/auth_user":
     post:
       summary: check a user
