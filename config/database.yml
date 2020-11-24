@@ -49,6 +49,7 @@ test:
 #
 production:
   <<: *default
+  socket: /var/run/mysqld/mysqld.sock
   database: study_around_BE_production
   username: root
   password: <%= Rails.application.credentials.dig(:db_pwd) %>
