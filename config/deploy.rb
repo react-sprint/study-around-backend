@@ -5,6 +5,9 @@ set :application, "study-around-backend"
 set :repo_url, "git@github.com:react-sprint/study-around-backend.git"
 set :rails_env, "production"
 
+set :migration_role, :app
+set :migration_command, 'RAILS_ENV=production db:create db:migrate'
+
 # Deploy to the user's home directory
 set :deploy_to, "/home/study-around-user/#{fetch :application}"
 

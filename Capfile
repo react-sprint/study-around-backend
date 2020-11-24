@@ -38,6 +38,7 @@ require 'capistrano/bundler'
 
 # require 'capistrano/rails'
 
+set :rails_env, "production"
 require 'capistrano/rails/migrations'
 require 'capistrano/passenger'
 
