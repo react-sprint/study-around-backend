@@ -17,7 +17,7 @@ default: &default
 development:
   <<: *default
   username: root
-  password: <%= Rails.application.credentials.dig(:db_pwd) %>
+  password: 
   socket: /tmp/mysql.sock
   database: study_around_BE_development
 
