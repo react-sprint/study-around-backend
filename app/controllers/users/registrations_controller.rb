@@ -10,9 +10,54 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    # super and return 
+    build_resource(sign_up_params)
+
+    resource.save
+    yield resource if block_given?
+    if resource.persisted?
+      if resource.active_for_authentication?
+        p "in 1"
+        # set_flash_message! :notice, :signed_up
+        sign_up(resource_name, resource)
+        render json: { 
+              user: resource, 
+              message: "user create proccess complete"
+            }.to_json and return
+        # respond_with(resource, message: "user create proccess complete")
+      else
+        p "in 2"
+        # set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
+        expire_data_after_sign_in!
+        # respond_with(resource, message: "signed_up_but_#{resource.inactive_message}")
+        render json: { 
+          user: resource, 
+          message: "signed_up_but_#{resource.inactive_message}"
+        }.to_json and return
+      end
+    else
+      p "in 3"
+      clean_up_passwords resource
+      set_minimum_password_length
+      render json: { 
+        message: "invalid email or password",
+      }.to_json and return
+      # respond_with resource
+    end
+    # super do
+    #   p resource
+    #   p flash
+    #   return resource
+    # end
+    #   render json: { 
+    #     user: current_user, 
+    #     # token: form_authenticity_token 
+    #   }.to_json and return
+    # end
+    # render json: {message: "New user created successfully"}
+    
+  end
 
   # GET /resource/edit
   # def edit
@@ -42,7 +87,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
-  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
+  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password] )
   # end
 
   # If you have extra params to permit, append them to the sanitizer.
