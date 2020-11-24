@@ -50,5 +50,5 @@ test:
 production:
   <<: *default
   database: study_around_BE_production
-  username: study_around_BE
-  password: <%= ENV['STUDY_AROUND_BE_DATABASE_PASSWORD'] %>
+  username: root
+  password: <%= Rails.application.credentials.dig(:db_pwd) %>
