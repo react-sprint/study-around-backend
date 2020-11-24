@@ -54,5 +54,5 @@ production:
   <<: *default
   socket: /var/run/mysqld/mysqld.sock
   database: study_around_BE_production
-  username: study-around-user
-  password: <%= ENV["RAILS_DB_PWD"] %>
+  username: root
+  password: 
