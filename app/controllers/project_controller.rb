@@ -29,12 +29,14 @@ class ProjectController < ApplicationController
     project.authorization_password = key
     project.save
 
+    p current_user.id
+    p project.id
     group = GroupUserAndProject.new
-    group.user_id = current_user.id
-    group.project_id = project.id
+    group.user = current_user
+    group.project = project
     group.save
     
-    render :json => {}
+    render :json => project, :except => [:id, :created_at, :updated_at]
     # @dataJson = { :message => "[Test] Token 인증 되었습니다! :D", :user => current_user }
     # render :json => @dataJson, :except => [:id, :created_at, :updated_at]
   end

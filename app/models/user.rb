@@ -5,5 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
   has_many :replies
-  has_many :group_user_and_project
+  has_many :group_user_and_projects
 end

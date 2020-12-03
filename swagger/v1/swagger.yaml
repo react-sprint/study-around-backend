@@ -1,5 +1,5 @@
 ---
-openapi: 3.0.1
+swagger: '2.0'
 info:
   title: API V1
   version: v1
@@ -9,100 +9,96 @@ paths:
       summary: create a user
       tags:
       - User
-      parameters: []
+      consumes:
+      - application/json
+      parameters:
+      - name: auth
+        in: body
+        schema:
+          type: object
+          properties:
+            email:
+              type: string
+            password:
+              type: string
+          required:
+          - email
+          - password
       responses:
         '201':
           description: user is created
-          content: {}
         '422':
           description: invalid request
-          content: {}
-      requestBody:
-        content:
-          application/json:
-            schema:
+  "/auth_user":
+    post:
+      summary: check a user
+      tags:
+      - User
+      consumes:
+      - application/json
+      parameters:
+      - name: auth
+        in: body
+        schema:
+          type: object
+          properties:
+            auth:
               type: object
               properties:
                 email:
                   type: string
                 password:
                   type: string
-              required:
-              - email
-              - password
-  "/auth_user":
-    post:
-      summary: check a user
-      tags:
-      - User
-      parameters: []
+          required:
+          - email
+          - password
       responses:
         '201':
           description: user is vaild
-          content: {}
         '422':
           description: invalid request
-          content: {}
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                auth:
-                  type: object
-                  properties:
-                    email:
-                      type: string
-                    password:
-                      type: string
-              required:
-              - email
-              - password
   "/project/create":
     post:
       summary: create a project
       tags:
       - Project
+      consumes:
+      - application/json
       parameters:
       - name: Authorization
         in: header
+        type: string
+      - name: project
+        in: body
         schema:
-          type: string
+          type: object
+          properties:
+            project:
+              type: object
+              properties:
+                name:
+                  type: string
+                introduce:
+                  type: string
+                manager_introduce:
+                  type: string
+                manager:
+                  type: integer
+                wday:
+                  type: string
+                start_hour:
+                  type: integer
+                start_minute:
+                  type: integer
+                end_hour:
+                  type: integer
+                end_minute:
+                  type: integer
       responses:
         '201':
           description: project is created
-          content: {}
         '422':
           description: invalid request
-          content: {}
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                project:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-                    introduce:
-                      type: string
-                    manager_introduce:
-                      type: string
-                    manager:
-                      type: integer
-                    wday:
-                      type: string
-                    start_hour:
-                      type: integer
-                    start_minute:
-                      type: integer
-                    end_hour:
-                      type: integer
-                    end_minute:
-                      type: integer
 servers:
 - url: http://{defaultHost}
   variables:

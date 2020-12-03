@@ -6,6 +6,8 @@ class ApplicationController < ActionController::API
 
   ## JWT 토큰 검증
   def jwt_authenticate_request!
+    p "p request.headers[:Authorization]"
+    
     ## 토큰 안에 user id 정보가 있는지 확인 / 없을 시 error response 반환
     unless user_id_in_token?
       render json: { errors: ['Not Authenticated'] }, status: :unauthorized
@@ -34,6 +36,10 @@ class ApplicationController < ActionController::API
 
   ## 토큰 해석 후, Decode 내용 중 User id 정보 확인
   def user_id_in_token?
+    p "http_token"
+    p http_token
+    p "auth_token"
+    p auth_token
     http_token && auth_token && auth_token[:user_id].to_i
   end
 end
