@@ -127,7 +127,7 @@ paths:
           description: project is created
         '422':
           description: invalid request
-  "/project/{authorization_password}":
+  "/project/show/{authorization_password}":
     get:
       summary: show a project by password
       tags:
@@ -142,6 +142,22 @@ paths:
         in: path
         type: string
         required: true
+      responses:
+        '201':
+          description: project is created
+        '422':
+          description: invalid request
+  "/project/list":
+    get:
+      summary: show a projects by each user info
+      tags:
+      - Project
+      produces:
+      - application/json
+      parameters:
+      - name: Authorization
+        in: header
+        type: string
       responses:
         '201':
           description: project is created

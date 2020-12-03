@@ -48,6 +48,13 @@ class ProjectController < ApplicationController
     render :json => project, :except => [:id, :created_at, :updated_at]
   end
 
+  def list
+    # Project.includes(:group_user_and_projects).where(group_user_and_projects: {user_id: current_user.id})
+    projects = Project.joins(:group_user_and_projects).where(group_user_and_projects: {user_id: current_user.id}).all
+    p projects
+    render :json => projects, :except => [:id, :created_at, :updated_at]
+  end
+
   def delete
   end
 

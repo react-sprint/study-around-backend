@@ -9,7 +9,8 @@ Rails.application.routes.draw do
 
   post 'project/create' => 'project#create'
   post 'project/join' => 'project#join'
-  get 'project/:authorization_password' => 'project#show'
+  get 'project/show/:authorization_password' => 'project#show'
+  get 'project/list' => 'project#list'
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
