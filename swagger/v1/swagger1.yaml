@@ -59,52 +59,8 @@ paths:
               required:
               - email
               - password
-  "/project/create":
-    post:
-      summary: create a project
-      tags:
-      - Project
-      parameters:
-      - name: Authorization
-        in: header
-        schema:
-          type: string
-      responses:
-        '201':
-          description: project is created
-          content: {}
-        '422':
-          description: invalid request
-          content: {}
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                project:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-                    introduce:
-                      type: string
-                    manager_introduce:
-                      type: string
-                    manager:
-                      type: integer
-                    wday:
-                      type: string
-                    start_hour:
-                      type: integer
-                    start_minute:
-                      type: integer
-                    end_hour:
-                      type: integer
-                    end_minute:
-                      type: integer
 servers:
 - url: http://{defaultHost}
   variables:
     defaultHost:
-      default: localhost:3000
+      default: 52.229.184.11

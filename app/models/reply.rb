@@ -1,4 +1,4 @@
 class Reply < ApplicationRecord
   belongs_to :user
-  belongs_to :study
+  belongs_to :project
 end

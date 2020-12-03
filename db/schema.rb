@@ -23,20 +23,26 @@ ActiveRecord::Schema.define(version: 2020_11_29_122000) do
 
   create_table "projects", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
-    t.string "introduction"
+    t.string "introduce"
     t.string "authorization_password"
+    t.integer "manager"
     t.string "manager_introduce"
-    t.string "link"
+    t.string "wday"
+    t.integer "start_hour"
+    t.integer "start_minute"
+    t.integer "end_hour"
+    t.integer "end_minute"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "replies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "study_id"
+    t.bigint "project_id"
     t.string "contents"
+    t.string "auth_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["study_id"], name: "index_replies_on_study_id"
+    t.index ["project_id"], name: "index_replies_on_project_id"
   end
 
   create_table "studies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|

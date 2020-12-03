@@ -1,4 +1,4 @@
 class GroupUserAndProject < ApplicationRecord
-  has_many :users
-  has_many :projects
+  belongs_to :user
+  belongs_to :projects
 end

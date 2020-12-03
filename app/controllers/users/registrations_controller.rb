@@ -12,6 +12,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     # super and return 
+    # p sign_up_params
+    # p params[:registration]
     build_resource(sign_up_params)
 
     resource.save
@@ -38,6 +40,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       end
     else
       p "in 3"
+      p resource
       clean_up_passwords resource
       set_minimum_password_length
       render json: { 
@@ -86,9 +89,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # protected
 
   # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_up_params
-  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password] )
-  # end
+  def sign_up_params
+    params.require(:registration).permit(:email, :password)
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_account_update_params
