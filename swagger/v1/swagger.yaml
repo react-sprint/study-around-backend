@@ -99,6 +99,54 @@ paths:
           description: project is created
         '422':
           description: invalid request
+  "/project/join":
+    post:
+      summary: join user in a project
+      tags:
+      - Project
+      consumes:
+      - application/json
+      parameters:
+      - name: Authorization
+        in: header
+        type: string
+      - name: project
+        in: body
+        schema:
+          type: object
+          properties:
+            project:
+              type: object
+              properties:
+                authorization_password:
+                  type: string
+          required:
+          - authorization_password
+      responses:
+        '201':
+          description: project is created
+        '422':
+          description: invalid request
+  "/project/{authorization_password}":
+    get:
+      summary: show a project by password
+      tags:
+      - Project
+      produces:
+      - application/json
+      parameters:
+      - name: Authorization
+        in: header
+        type: string
+      - name: authorization_password
+        in: path
+        type: string
+        required: true
+      responses:
+        '201':
+          description: project is created
+        '422':
+          description: invalid request
 servers:
 - url: http://{defaultHost}
   variables:

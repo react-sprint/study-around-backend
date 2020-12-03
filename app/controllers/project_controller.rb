@@ -2,19 +2,23 @@ class ProjectController < ApplicationController
   before_action :jwt_authenticate_request!
   
   def join
+    project = Project.where(authorization_password: params[:project][:authorization_password]).take
+    
+    group = GroupUserAndProject.new
+    group.user = current_user
+    group.project = project
+    group.save
+    
+    render :json => project, :except => [:id, :created_at, :updated_at]
   end
   
   def create
-    p current_user
-    p "create"
-    p params
-    p params[:project][:name]
 
     project = Project.new
     project.name = params[:project][:name]
     project.introduce = params[:project][:introduce]
     project.manager_introduce = params[:project][:manager_introduce]
-    # project.manager = current_user.id
+    project.manager = current_user.id
     
     project.wday = params[:project][:wday]
     project.start_hour = params[:project][:start_hour]
@@ -29,8 +33,6 @@ class ProjectController < ApplicationController
     project.authorization_password = key
     project.save
 
-    p current_user.id
-    p project.id
     group = GroupUserAndProject.new
     group.user = current_user
     group.project = project
@@ -42,6 +44,8 @@ class ProjectController < ApplicationController
   end
 
   def show
+    project = Project.where(authorization_password: params[:authorization_password]).take
+    render :json => project, :except => [:id, :created_at, :updated_at]
   end
 
   def delete

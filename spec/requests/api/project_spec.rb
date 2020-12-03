@@ -40,4 +40,50 @@ describe 'Study-around API project' do
       end
     end
   end
+
+  path '/project/join' do
+    post 'join user in a project' do
+      tags 'Project'
+      consumes 'application/json'
+      
+      parameter name: 'Authorization', :in => :header, :type => :string
+      parameter name: :project, in: :body, schema: {
+        type: :object,
+        properties: {
+          project: {
+            type: :object,
+            properties: { 
+              authorization_password: { type: :string }
+            } 
+          }
+        },
+        required: [ 'authorization_password' ]
+      } # properties end
+    
+      response '201', 'project is created' do
+        run_test!
+      end
+      
+      response '422', 'invalid request' do
+        run_test!
+      end
+    end
+  end
+
+  path '/project/{authorization_password}' do
+    get 'show a project by password' do
+      tags 'Project'
+      produces 'application/json'
+      parameter name: 'Authorization', :in => :header, :type => :string
+      parameter name: :authorization_password, in: :path, type: :string
+    
+      response '201', 'project is created' do
+        run_test!
+      end
+      
+      response '422', 'invalid request' do
+        run_test!
+      end
+    end
+  end
 end

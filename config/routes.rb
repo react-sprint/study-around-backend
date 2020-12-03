@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get 'api/test'
 
   post 'project/create' => 'project#create'
+  post 'project/join' => 'project#join'
+  get 'project/:authorization_password' => 'project#show'
   
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
