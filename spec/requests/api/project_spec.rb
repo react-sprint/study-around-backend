@@ -18,7 +18,7 @@ describe 'Study-around API project' do
               manager_introduce: { type: :string },
               authorization_password: {type: :string},
               # manager: { type: :integer },
-              wday: { type: :string },
+              # wday: { type: :string },
               start_hour: { type: :integer },
               start_minute: { type: :integer },
               end_hour: { type: :integer },
