@@ -81,8 +81,6 @@ paths:
                   type: string
                 authorization_password:
                   type: string
-                wday:
-                  type: string
                 start_hour:
                   type: integer
                 start_minute:
