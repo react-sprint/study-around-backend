@@ -1,5 +1,5 @@
 class ProjectController < ApplicationController
-  before_action :jwt_authenticate_request!
+  # before_action :jwt_authenticate_request!
   
   def join
     project = Project.where(authorization_password: params[:project][:authorization_password]).take
@@ -14,38 +14,48 @@ class ProjectController < ApplicationController
   
   def create
 
+    if Project.where(authorization_password: params[:project][:authorization_password]).take.nil?
+      return render json: {
+        message: "동일한 password가 있습니다. password를 변경해주세요." , 
+        status: 400
+        }, 
+        status: 400,
+        except: [:id, :manager_user_id, :created_at, :updated_at]
+    end
+
     project = Project.new
     project.name = params[:project][:name]
     project.introduce = params[:project][:introduce]
     project.manager_introduce = params[:project][:manager_introduce]
-    project.manager = current_user.id
+    # project.manager_user_id = current_user.id
     
-    project.wday = params[:project][:wday]
+    project.authorization_password = params[:project][:authorization_password]
+    # project.wday = params[:project][:wday]
     project.start_hour = params[:project][:start_hour]
     project.start_minute = params[:project][:start_minute]
     project.end_hour = params[:project][:end_hour]
     project.end_minute = params[:project][:end_minute]
-
-    # authorization_password
-    source = ("a".."z").to_a + ("A".."Z").to_a + (0..9).to_a + ["_","-","."]
-    key = ""
-    6.times{ key += source[rand(source.size)].to_s }
-    project.authorization_password = key
+    
+    # authorization_password 랜덤
+    # source = ("a".."z").to_a + ("A".."Z").to_a + (0..9).to_a + ["_","-","."]
+    # key = ""
+    # 6.times{ key += source[rand(source.size)].to_s }
+    # project.authorization_password = key
     project.save
 
-    group = GroupUserAndProject.new
-    group.user = current_user
-    group.project = project
-    group.save
+    # group = GroupUserAndProject.new
+    # group.user = current_user
+    # group.project = project
+    # group.save
     
-    render :json => project, :except => [:id, :created_at, :updated_at]
+    return render :json => project, :except => [:id, :created_at, :updated_at]
     # @dataJson = { :message => "[Test] Token 인증 되었습니다! :D", :user => current_user }
     # render :json => @dataJson, :except => [:id, :created_at, :updated_at]
   end
 
   def show
     project = Project.where(authorization_password: params[:authorization_password]).take
-    render :json => project, :except => [:id, :created_at, :updated_at]
+    render :json => project, :except => [:id, :manager_user_id, :created_at, :updated_at]
   end
 
   def list

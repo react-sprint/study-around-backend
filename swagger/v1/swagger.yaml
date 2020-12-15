@@ -65,9 +65,6 @@ paths:
       consumes:
       - application/json
       parameters:
-      - name: Authorization
-        in: header
-        type: string
       - name: project
         in: body
         schema:
@@ -82,8 +79,8 @@ paths:
                   type: string
                 manager_introduce:
                   type: string
-                manager:
-                  type: integer
+                authorization_password:
+                  type: string
                 wday:
                   type: string
                 start_hour:
@@ -107,9 +104,6 @@ paths:
       consumes:
       - application/json
       parameters:
-      - name: Authorization
-        in: header
-        type: string
       - name: project
         in: body
         schema:
@@ -135,9 +129,6 @@ paths:
       produces:
       - application/json
       parameters:
-      - name: Authorization
-        in: header
-        type: string
       - name: authorization_password
         in: path
         type: string
@@ -154,10 +145,6 @@ paths:
       - Project
       produces:
       - application/json
-      parameters:
-      - name: Authorization
-        in: header
-        type: string
       responses:
         '201':
           description: project is created
