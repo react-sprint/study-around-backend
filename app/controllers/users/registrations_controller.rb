@@ -23,29 +23,29 @@ class Users::RegistrationsController < Devise::RegistrationsController
         p "in 1"
         # set_flash_message! :notice, :signed_up
         sign_up(resource_name, resource)
-        render json: { 
-              user: resource, 
-              message: "user create proccess complete"
-            }.to_json and return
+        return render json: { message: "user create proccess complete"}, status: 200
+        # render json: { 
+        #       user: resource, 
+        #       message: "user create proccess complete"
+        #     }.to_json and return
         # respond_with(resource, message: "user create proccess complete")
       else
         p "in 2"
         # set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
         expire_data_after_sign_in!
         # respond_with(resource, message: "signed_up_but_#{resource.inactive_message}")
-        render json: { 
+        return render json: {
           user: resource, 
           message: "signed_up_but_#{resource.inactive_message}"
-        }.to_json and return
+        }, 
+        status: 204
       end
     else
       p "in 3"
       p resource
       clean_up_passwords resource
       set_minimum_password_length
-      render json: { 
-        message: "invalid email or password",
-      }.to_json and return
+      return render json: { message: "invalid email or password"}, status: 400
       # respond_with resource
     end
     # super do

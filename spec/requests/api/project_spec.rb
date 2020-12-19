@@ -6,7 +6,7 @@ describe 'Study-around API project' do
       tags 'Project'
       consumes 'application/json'
       
-      # parameter name: 'Authorization', :in => :header, :type => :string
+      parameter name: 'Authorization', :in => :header, :type => :string
       parameter name: :project, in: :body, schema: {
         type: :object,
         properties: {
@@ -47,7 +47,7 @@ describe 'Study-around API project' do
       tags 'Project'
       consumes 'application/json'
       
-      # parameter name: 'Authorization', :in => :header, :type => :string
+      parameter name: 'Authorization', :in => :header, :type => :string
       parameter name: :project, in: :body, schema: {
         type: :object,
         properties: {
@@ -75,7 +75,7 @@ describe 'Study-around API project' do
     get 'show a project by password' do
       tags 'Project'
       produces 'application/json'
-      # parameter name: 'Authorization', :in => :header, :type => :string
+      parameter name: 'Authorization', :in => :header, :type => :string
       parameter name: :authorization_password, in: :path, type: :string
     
       response '201', 'project is created' do
@@ -92,7 +92,7 @@ describe 'Study-around API project' do
     get 'show a projects by each user info' do
       tags 'Project'
       produces 'application/json'
-      # parameter name: 'Authorization', :in => :header, :type => :string
+      parameter name: 'Authorization', :in => :header, :type => :string
     
       response '201', 'project is created' do
         run_test!

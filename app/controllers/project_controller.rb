@@ -1,5 +1,5 @@
 class ProjectController < ApplicationController
-  # before_action :jwt_authenticate_request!
+  before_action :jwt_authenticate_request!
   
   def join
     project = Project.where(authorization_password: params[:project][:authorization_password]).take
